@@ -1,7 +1,9 @@
 import React from "react"
+import { Link } from "react-router"
 import { ServerStatus, type ServerStatusType } from "~/components"
 
 export interface IServer {
+  id: string
   name: string
   username: string
   lastLoggedIn: string
@@ -24,14 +26,16 @@ export const ServerList: React.FC<IServerListProps> = ({ servers }) => {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {servers.map((server) => (
-        <ServerStatus
-          key={server.name}
-          name={server.name}
-          username={server.username}
-          lastLoggedIn={server.lastLoggedIn}
-          status={server.status}
-        />
+        <Link key={server.id} to={`/server/${server.id}/details`}>
+          <ServerStatus
+            name={server.name}
+            username={server.username}
+            lastLoggedIn={server.lastLoggedIn}
+            status={server.status}
+          />
+        </Link>
       ))}
     </div>
   )
 }
+
