@@ -6,7 +6,7 @@ export const NonAuthenticatedUserRoute: React.FC<{ children: React.ReactNode }> 
   const isLoggedIn = useUser((state) => state.isLoggedIn)
 
   if (isLoggedIn) {
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/" replace />
   }
 
   return <>{children}</>
