@@ -10,9 +10,9 @@ interface IServerStatusProps {
 }
 
 const statusColors: Record<ServerStatusType, string> = {
-  online: "bg-green-500",
-  offline: "bg-red-500",
-  unknown: "bg-gray-400",
+  online: "status-success",
+  offline: "status-error",
+  unknown: "status-neutral",
 }
 
 export const ServerStatus: React.FC<IServerStatusProps> = ({
@@ -22,7 +22,7 @@ export const ServerStatus: React.FC<IServerStatusProps> = ({
   status,
 }) => {
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-1 transition-colors duration-200 hover:border-blue-500 dark:hover:border-blue-400 cursor-pointer">
+    <div className="card card-border p-4 space-y-1 transition-colors duration-200 hover:border-primary cursor-pointer">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -38,7 +38,7 @@ export const ServerStatus: React.FC<IServerStatusProps> = ({
           </svg>
         </div>
         <span
-          className={`inline-block w-3 h-3 rounded-full ${statusColors[status]}`}
+          className={`status  ${statusColors[status]}`}
           title={status}
         />
       </div>

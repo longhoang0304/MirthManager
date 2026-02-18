@@ -68,7 +68,7 @@ export const DashboardServers: React.FC<IDashboardServersProps> = ({ servers }) 
         <div className="relative" ref={menuRef}>
           <button
             onClick={() => setOpen((prev) => !prev)}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="btn btn-ghost btn-sm"
           >
             {/* Sort icon */}
             <svg
@@ -83,32 +83,30 @@ export const DashboardServers: React.FC<IDashboardServersProps> = ({ servers }) 
           </button>
 
           {open && (
-            <div className="absolute right-0 mt-2 w-56 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg py-1 z-50">
+            <ul className="menu dropdown-content absolute right-0 mt-2 w-56 rounded-xl border border-base-300 bg-base-100 shadow-lg z-50">
               {sortOptions.map((opt, idx) => (
-                <button
-                  key={`${opt.key}-${opt.dir}`}
-                  onClick={() => {
-                    setSelectedIdx(idx)
-                    setOpen(false)
-                  }}
-                  className={`w-full text-left px-4 py-2 text-sm transition-colors ${selectedIdx === idx
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 font-medium"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    }`}
-                >
-                  {opt.label}
-                </button>
+                <li key={`${opt.key}-${opt.dir}`}>
+                  <button
+                    onClick={() => {
+                      setSelectedIdx(idx)
+                      setOpen(false)
+                    }}
+                    className={selectedIdx === idx ? "active" : ""}
+                  >
+                    {opt.label}
+                  </button>
+                </li>
               ))}
-            </div>
+            </ul>
           )}
         </div>
       </div>
 
       <Link to="/add-server" className="block mb-4">
-        <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-4 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:border-blue-500 dark:hover:border-blue-400">
+        <div className="card card-border card-dash p-4 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:border-primary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8 text-gray-400 dark:text-gray-500"
+            className="w-8 h-8 text-base-content/40"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -118,7 +116,7 @@ export const DashboardServers: React.FC<IDashboardServersProps> = ({ servers }) 
               clipRule="evenodd"
             />
           </svg>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <span className="text-sm font-medium text-base-content/60">
             Add new server
           </span>
         </div>

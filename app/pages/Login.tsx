@@ -16,7 +16,7 @@ export const Login: React.FC<ILoginProps> = ({ onLogin, onRegister, error }) => 
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
         <div className="max-w-100 w-full space-y-6 px-4">
-          <div className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-6">
+          <div className="card card-border rounded-3xl p-6 space-y-6">
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 text-center">
               Mirth Manager Login
             </h1>
@@ -28,20 +28,20 @@ export const Login: React.FC<ILoginProps> = ({ onLogin, onRegister, error }) => 
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button
-                className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="btn btn-primary w-full"
                 onClick={() => onLogin(password)}
               >
                 Login
               </button>
               <button
-                className="w-full px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="btn btn-ghost w-full"
                 onClick={onRegister}
               >
                 Register
               </button>
             </div>
             {error && (
-              <p className="text-sm text-red-600 dark:text-red-400 text-center">
+              <p className="text-sm text-error text-center">
                 {error.message}
               </p>
             )}

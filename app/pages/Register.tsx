@@ -15,7 +15,7 @@ export const Register: React.FC<IRegisterProps> = ({ onRegister }) => {
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
         <div className="max-w-[400px] w-full space-y-6 px-4">
-          <div className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-6">
+          <div className="card card-border rounded-3xl p-6 space-y-6">
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 text-center">
               Mirth Manager Register
             </h1>
@@ -32,18 +32,18 @@ export const Register: React.FC<IRegisterProps> = ({ onRegister }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="text-sm text-amber-600 dark:text-amber-500 text-center font-medium">
+              <p className="text-sm text-warning text-center font-medium">
                 Please remember your password and keep it safe, password is non-recoverable.
               </p>
               <button
-                className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="btn btn-primary w-full"
                 onClick={() => onRegister(name, password)}
               >
                 Register
               </button>
             </div>
             <div className="pt-2">
-              <p className="text-sm text-red-600 dark:text-red-500 text-center font-medium">
+              <p className="text-sm text-error text-center font-medium">
                 By registering, you will accept that all of the previous data will be wiped and cannot be recovered.
               </p>
             </div>

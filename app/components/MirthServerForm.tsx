@@ -54,10 +54,7 @@ export const MirthServerForm: React.FC<IMirthServerFormProps> = ({
     <div className="space-y-5">
       {/* Server Name */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="server-name"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="server-name" className="label">
           Server Name
         </label>
         <TextInput
@@ -72,10 +69,7 @@ export const MirthServerForm: React.FC<IMirthServerFormProps> = ({
       {/* IP & Port */}
       <div className="grid grid-cols-3 gap-3">
         <div className="col-span-2 space-y-1.5">
-          <label
-            htmlFor="server-ip"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
+          <label htmlFor="server-ip" className="label">
             IP Address
           </label>
           <TextInput
@@ -88,10 +82,7 @@ export const MirthServerForm: React.FC<IMirthServerFormProps> = ({
           />
         </div>
         <div className="space-y-1.5">
-          <label
-            htmlFor="server-port"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
+          <label htmlFor="server-port" className="label">
             Port
           </label>
           <TextInput
@@ -107,10 +98,7 @@ export const MirthServerForm: React.FC<IMirthServerFormProps> = ({
 
       {/* Username */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="server-username"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="server-username" className="label">
           Username
         </label>
         <TextInput
@@ -125,10 +113,7 @@ export const MirthServerForm: React.FC<IMirthServerFormProps> = ({
 
       {/* Password */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="server-password"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="server-password" className="label">
           Password
         </label>
         <TextInput
@@ -143,25 +128,13 @@ export const MirthServerForm: React.FC<IMirthServerFormProps> = ({
 
       {/* Buttons */}
       <div className="flex items-center gap-3 pt-2">
-        <button
-          type="button"
-          className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          onClick={handleSave}
-        >
+        <button type="button" className="btn btn-primary flex-1" onClick={handleSave}>
           Save
         </button>
-        <button
-          type="button"
-          className="flex-1 px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-          onClick={handleReset}
-        >
+        <button type="button" className="btn btn-ghost flex-1" onClick={handleReset}>
           Reset
         </button>
-        <button
-          type="button"
-          className="flex-1 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-          onClick={handleConnect}
-        >
+        <button type="button" className="btn btn-success flex-1" onClick={handleConnect}>
           Test connection
         </button>
       </div>

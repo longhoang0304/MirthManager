@@ -15,7 +15,7 @@ export const AddNewServer: React.FC = () => {
       <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
         Add New Server
       </h2>
-      <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+      <div className="card card-border p-6">
         <MirthServerForm onSave={handleSave} onConnect={handleConnect} />
       </div>
     </section>
