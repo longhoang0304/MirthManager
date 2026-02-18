@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react"
 import { useNavigate } from "react-router"
 import { register } from "~/usecases/register"
+import { TextInput } from "~/elements"
 
 interface IRegisterProps {
   onRegister: (name: string, password: string) => void
@@ -19,17 +20,15 @@ export const Register: React.FC<IRegisterProps> = ({ onRegister }) => {
               Mirth Manager Register
             </h1>
             <div className="space-y-4">
-              <input
+              <TextInput
                 type="text"
                 placeholder="Name"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <input
+              <TextInput
                 type="password"
                 placeholder="Password"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

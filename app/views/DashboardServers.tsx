@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react"
+import { Link } from "react-router"
 import { ServerList } from "./ServerList"
 import type { IServer } from "./ServerList"
 
@@ -91,8 +92,8 @@ export const DashboardServers: React.FC<IDashboardServersProps> = ({ servers }) 
                     setOpen(false)
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors ${selectedIdx === idx
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 font-medium"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 font-medium"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                     }`}
                 >
                   {opt.label}
@@ -102,6 +103,26 @@ export const DashboardServers: React.FC<IDashboardServersProps> = ({ servers }) 
           )}
         </div>
       </div>
+
+      <Link to="/add-server" className="block mb-4">
+        <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-4 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:border-blue-500 dark:hover:border-blue-400">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-8 h-8 text-gray-400 dark:text-gray-500"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            Add new server
+          </span>
+        </div>
+      </Link>
 
       <ServerList servers={sorted} />
     </section>

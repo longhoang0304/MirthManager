@@ -6,4 +6,5 @@ export default [
   route("register", "routes/register.tsx"),
   route("dashboard", "routes/dashboard.tsx"),
   route("server/:serverId/details", "routes/server-detail.tsx"),
+  route("add-server", "routes/add-server.tsx"),
 ] satisfies RouteConfig;

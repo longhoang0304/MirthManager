@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react"
 import { useNavigate } from "react-router"
 import { login } from "~/usecases/login"
 import useUser from "~/stores/users"
+import { TextInput } from "~/elements"
 
 interface ILoginProps {
   onLogin: (password: string) => void
@@ -20,22 +21,21 @@ export const Login: React.FC<ILoginProps> = ({ onLogin, onRegister, error }) => 
               Mirth Manager Login
             </h1>
             <div className="space-y-4">
-              <input
+              <TextInput
                 type="password"
                 placeholder="Mirth manager password"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button
-                  className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  onClick={() => onLogin(password)}
+                className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                onClick={() => onLogin(password)}
               >
                 Login
               </button>
               <button
-                  className="w-full px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-                  onClick={onRegister}
+                className="w-full px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                onClick={onRegister}
               >
                 Register
               </button>
@@ -75,8 +75,8 @@ export const LoginPage: React.FC = () => {
   }, [navigate, setName])
 
   return <Login
-      onLogin={handleOnLogin}
-      onRegister={() => navigate("/register")}
-      error={error}
+    onLogin={handleOnLogin}
+    onRegister={() => navigate("/register")}
+    error={error}
   />
 }
