@@ -1,8 +1,14 @@
-import { Route, Switch } from "wouter"
-import { GuestRoute } from "./GuestRoute"
-import { UserRoute } from "./UserRoute"
-import HomeRoute from "./HomeRoute"
-import { Login, Register, Dashboard, AddOrImportServer, ServerDetail } from "~/pages"
+import { Route, Switch } from 'wouter'
+import { GuestRoute } from './GuestRoute'
+import { UserRoute } from './UserRoute'
+import HomeRoute from './HomeRoute'
+import {
+  Login,
+  Register,
+  Dashboard,
+  AddOrImportServer,
+  ServerDetail,
+} from '~/pages'
 
 export default function MainRouter() {
   return (
