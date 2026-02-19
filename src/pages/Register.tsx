@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react"
-import { useNavigate } from "react-router"
+import { useLocation } from "wouter"
 import { register } from "~/usecases/register"
 import { TextInput } from "~/elements"
 
@@ -55,7 +55,7 @@ export const Register: React.FC<IRegisterProps> = ({ onRegister }) => {
 }
 
 export const RegisterPage: React.FC = () => {
-  const navigate = useNavigate()
+  const [, navigate] = useLocation()
   const handleOnRegister = useCallback(async (name: string, password: string) => {
     await register(name, password)
     navigate("/")

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react"
-import { useNavigate } from "react-router"
+import { useLocation } from "wouter"
 import { login } from "~/usecases/login"
 import useUser from "~/stores/users"
 import { TextInput } from "~/elements"
@@ -53,7 +53,7 @@ export const Login: React.FC<ILoginProps> = ({ onLogin, onRegister, error }) => 
 }
 
 export const LoginPage: React.FC = () => {
-  const navigate = useNavigate()
+  const [, navigate] = useLocation()
   const setName = useUser((state) => state.setName)
   const [error, setError] = useState<Error | null>(null)
   const handleOnLogin = useCallback(async (password: string) => {

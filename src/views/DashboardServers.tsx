@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react"
-import { Link } from "react-router"
+import { Link } from "wouter"
 import { ServerList } from "./ServerList"
 import type { IServer } from "./ServerList"
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { useParams } from "react-router"
+import { useParams } from "wouter"
 import { Header } from "~/views"
 
 // TODO: replace with real data fetching
