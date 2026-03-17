@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react"
 import { useLocation } from "wouter"
-import { register } from "~/usecases/register"
+import { Effect as Fx } from "effect"
+import { AuthUseCase, AuthUseCaseLive } from "~/usecases"
 import { TextInput } from "~/elements"
 
 interface IRegisterProps {
@@ -57,9 +58,15 @@ export const Register: React.FC<IRegisterProps> = ({ onRegister }) => {
 export const RegisterPage: React.FC = () => {
   const [, navigate] = useLocation()
   const handleOnRegister = useCallback(async (name: string, password: string) => {
-    await register(name, password)
+    await Fx.gen(function* () {
+      const auth = yield* AuthUseCase
+      yield* auth.register(name, password)
+    }).pipe(
+      Fx.provide(AuthUseCaseLive),
+      Fx.runPromise,
+    )
     navigate("/")
   }, [navigate])
 
   return <Register onRegister={handleOnRegister} />
-}
+}
