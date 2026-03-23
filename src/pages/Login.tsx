@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useLocation } from 'wouter'
 import { Effect as Fx } from 'effect'
 import { AuthUseCase, AuthUseCaseLive } from '~/usecases'
-import useUser from '~/stores/users.store'
+import useUser from '~/infras/zustard.infra/users.zustard'
 import { TextInput } from '~/elements'
 
 interface ILoginProps {
@@ -69,10 +69,7 @@ export const LoginPage: React.FC = () => {
         const data = await Fx.gen(function* () {
           const auth = yield* AuthUseCase
           return yield* auth.login(password)
-        }).pipe(
-          Fx.provide(AuthUseCaseLive),
-          Fx.runPromise,
-        )
+        }).pipe(Fx.provide(AuthUseCaseLive), Fx.runPromise)
         setName((data.user as string) ?? '')
         navigate('/dashboard')
       } catch (e: any) {

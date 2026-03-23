@@ -5,14 +5,8 @@ import {
   CryptoConfigService,
   CryptoConfigForLogin,
   CryptoConfigForRegistration,
-  CryptoConfigFromKey,
+  CryptoConfigFromSession,
 } from '~/services/crypto-config.service'
-import {
-  generateXorKey,
-  xor,
-  exportAppKey,
-  importAppKey,
-} from '~/utils/crypto.util'
 import { encodeBase64, decodeBase64 } from '~/utils/base64.util'
 
 // ── Custom Errors ──────────────────────────────────────────────────────────
@@ -60,6 +54,9 @@ export class AuthUseCase extends Ctx.Tag('AuthUseCase')<
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+const withCryptoService = (configLayer: Lyr.Layer<CryptoConfigService, Error>) =>
+  Lyr.merge(configLayer, CryptoServiceLive.pipe(Lyr.provide(configLayer)))
+
 const decryptStoredData = Fx.gen(function* () {
   const cs = yield* CryptoService
   const dataB64 = localStorage.getItem('data')
@@ -75,16 +72,6 @@ const decryptStoredData = Fx.gen(function* () {
   return JSON.parse(decrypted) as Record<string, unknown>
 })
 
-const saveKeyToSession = (key: CryptoKey) =>
-  Fx.gen(function* () {
-    const xorKey = yield* generateXorKey(32)
-    const keyBytes = yield* exportAppKey(key)
-    const encryptedKey = yield* xor(new Uint8Array(keyBytes), xorKey)
-    const encryptedKeyB64 = yield* encodeBase64(encryptedKey)
-    const xorKeyB64 = yield* encodeBase64(xorKey)
-    sessionStorage.setItem('encryptedKey', encryptedKeyB64)
-    window.name = xorKeyB64
-  })
 
 // ── Live Implementation ────────────────────────────────────────────────────
 
@@ -95,11 +82,10 @@ export const AuthUseCaseLive = Lyr.succeed(
       Fx.gen(function* () {
         const config = yield* CryptoConfigService
         const result = yield* decryptStoredData
-        yield* saveKeyToSession(config.key)
+        yield* config.saveKeyToSession()
         return result
       }).pipe(
-        Fx.provide(CryptoServiceLive),
-        Fx.provide(CryptoConfigForLogin(password)),
+        Fx.provide(withCryptoService(CryptoConfigForLogin(password))),
       ),
 
     register: (name: string, password: string) =>
@@ -110,25 +96,12 @@ export const AuthUseCaseLive = Lyr.succeed(
         const encryptedB64 = yield* encodeBase64(new Uint8Array(encrypted))
         localStorage.setItem('data', encryptedB64)
       }).pipe(
-        Fx.provide(CryptoServiceLive),
-        Fx.provide(CryptoConfigForRegistration(password)),
+        Fx.provide(withCryptoService(CryptoConfigForRegistration(password))),
       ),
 
     restoreSession: () =>
-      Fx.gen(function* () {
-        const encryptedKeyB64 = sessionStorage.getItem('encryptedKey')
-        const xorKeyB64 = window.name
-        if (!encryptedKeyB64 || !xorKeyB64) return null
-
-        const encryptedKey = yield* decodeBase64(encryptedKeyB64)
-        const xorKey = yield* decodeBase64(xorKeyB64)
-        const keyBytes = yield* xor(encryptedKey, xorKey)
-        const key = yield* importAppKey(keyBytes)
-
-        return yield* decryptStoredData.pipe(
-          Fx.provide(CryptoServiceLive),
-          Fx.provide(CryptoConfigFromKey(key)),
-        )
-      }),
+      decryptStoredData.pipe(
+        Fx.provide(withCryptoService(CryptoConfigFromSession())),
+      ),
   })
 )

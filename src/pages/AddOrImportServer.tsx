@@ -1,5 +1,5 @@
 import React from 'react'
-import useUser from '~/stores/users.store'
+import useUser from '~/infras/zustard.infra/users.zustard'
 import { Header, AddNewServer } from '~/views'
 
 export const AddOrImportServer: React.FC = () => {
