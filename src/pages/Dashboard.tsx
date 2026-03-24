@@ -1,5 +1,5 @@
 import React from 'react'
-import useUser from '~/infras/zustard.infra/users.zustard'
+import useUser from '~/infras/zustard.infra/user.zustard'
 import { type IServer, Header, DashboardServers } from '~/views'
 
 const mockServers: IServer[] = [

@@ -14,7 +14,7 @@ export class CryptoConfigService extends Ctx.Tag('CryptoConfigService')<
   ICryptoConfigService
 >() {}
 
-// ── For Login: restore salt + iv from repo ─────────────────────────────────
+// ---------------------- For Login: restore salt + iv from repo -----------------------------
 
 export const CryptoConfigForLogin = (password: string) =>
   Lyr.effect(
@@ -33,7 +33,7 @@ export const CryptoConfigForLogin = (password: string) =>
     })
   ).pipe(Lyr.provide(CryptoRepoLive))
 
-// ── For Registration: generate salt + iv, save to repo ─────────────────────
+// ---------------------- For Registration: generate salt + iv, save to repo ---------------------
 
 export const CryptoConfigForRegistration = (password: string) =>
   Lyr.effect(
@@ -56,7 +56,7 @@ export const CryptoConfigForRegistration = (password: string) =>
     })
   ).pipe(Lyr.provide(CryptoRepoLive))
 
-// ── For Session Restore: recover key from repo ─────────────────────────────
+// ---------------------- For Session Restore: recover key from repo -------------------------
 
 export const CryptoConfigFromSession = () =>
   Lyr.effect(

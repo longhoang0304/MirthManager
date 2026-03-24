@@ -7,7 +7,7 @@ import {
 } from '../utils/crypto.util'
 import { encodeBase64, decodeBase64 } from '../utils/base64.util'
 
-// ── Interface ──────────────────────────────────────────────────────────────
+// ---------------------- Interface ----------------------
 
 export interface ICryptoRepo {
   readonly getSalt: () => Fx.Effect<Uint8Array, Error>
@@ -18,19 +18,19 @@ export interface ICryptoRepo {
   readonly saveKey: (key: CryptoKey) => Fx.Effect<void, Error>
 }
 
-// ── Tag ────────────────────────────────────────────────────────────────────
+// ---------------------- Tag ----------------------------
 
 export class CryptoRepo extends Ctx.Tag('CryptoRepo')<
   CryptoRepo,
   ICryptoRepo
 >() {}
 
-// ── Live Layer ─────────────────────────────────────────────────────────────
+// ---------------------- Live Layer -----------------------
 
 export const CryptoRepoLive = Lyr.succeed(
   CryptoRepo,
   CryptoRepo.of({
-    // ── Salt ─────────────────────────────────────────────────────────────
+    // ---------------------- Salt -----------------------
     getSalt: () =>
       Fx.gen(function* () {
         const saltB64 = localStorage.getItem('salt')
@@ -44,7 +44,7 @@ export const CryptoRepoLive = Lyr.succeed(
         localStorage.setItem('salt', saltB64)
       }),
 
-    // ── IV ────────────────────────────────────────────────────────────────
+    // ---------------------- IV ------------------------
     getIv: () =>
       Fx.gen(function* () {
         const ivB64 = localStorage.getItem('iv')
@@ -58,7 +58,7 @@ export const CryptoRepoLive = Lyr.succeed(
         localStorage.setItem('iv', ivB64)
       }),
 
-    // ── Key (XOR-protected in sessionStorage + window.name) ──────────────
+    // ---------------------- Key (XOR-protected in sessionStorage + window.name) --------------
     getKey: () =>
       Fx.gen(function* () {
         const encryptedKeyB64 = sessionStorage.getItem('encryptedKey')

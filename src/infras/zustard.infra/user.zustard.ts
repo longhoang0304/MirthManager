@@ -1,7 +1,7 @@
 import { create } from 'zustand'
+import type { UserModel } from '~/models'
 
-interface UserState {
-  name: string
+interface UserState extends UserModel {
   isLoggedIn: boolean | undefined
   setName: (name: string) => void
   setLoggedIn: (isLoggedIn: boolean) => void
@@ -10,6 +10,7 @@ interface UserState {
 const useUser = create<UserState>()(
   (set) => ({
     name: '',
+    username: '',
     isLoggedIn: undefined,
     setName: (name: string) => set(() => ({ name, isLoggedIn: true })),
     setLoggedIn: (isLoggedIn: boolean) => set(() => ({ isLoggedIn })),

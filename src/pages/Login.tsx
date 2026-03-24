@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useLocation } from 'wouter'
 import { Effect as Fx } from 'effect'
 import { AuthUseCase, AuthUseCaseLive } from '~/usecases'
-import useUser from '~/infras/zustard.infra/users.zustard'
+import useUser from '~/infras/zustard.infra/user.zustard'
 import { TextInput } from '~/elements'
 
 interface ILoginProps {

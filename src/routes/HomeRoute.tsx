@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Redirect } from 'wouter'
 import { Effect as Fx } from 'effect'
-import useUser from '~/infras/zustard.infra/users.zustard'
+import useUser from '~/infras/zustard.infra/user.zustard'
 import { AuthUseCase, AuthUseCaseLive } from '~/usecases'
 
 export default function HomeRoute() {
